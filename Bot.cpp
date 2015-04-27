@@ -25,14 +25,18 @@ void Bot::playGame()
 
 void Bot::pickStartingRegion()
 {
-		for (int i = 0; i < startingRegionsreceived.size(); ++i)
+	for (int i = 0; i < startingRegionsreceived.size(); ++i)
 	{
 		if(regions[startingRegionsreceived[i]].getNbNeighbors()  < 3 && ownedRegions.size() < 3)
 		{
 			std::cout <<  startingRegionsreceived[i] << std::endl;
+			break;
 		}
 		else
+		{
 			std::cout <<  startingRegionsreceived[i] << std::endl;
+			break;
+		}
 	}
 
 }
@@ -178,11 +182,6 @@ void Bot::executeAction()
 		return;
 	if (phase == Bot::PICK_STARTING_REGION)
 	{
-		if (setup)
-		{
-			setup = false;
-			preferStartingRegions();
-		}
 		pickStartingRegion();
 	}
 	else if (phase == Bot::PLACE_ARMIES)
