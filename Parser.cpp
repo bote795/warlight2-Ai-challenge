@@ -114,6 +114,12 @@ void Parser::parseSettings()
 				break;
 		}
 	}
+	else if (settingType == "starting_pick_amount")
+	{
+		int nbStartingRegions;;
+		std::cin >> nbStartingRegions;
+		theBot->setnbStartingRegions(nbStartingRegions);
+	}
 }
 
 void Parser::parseUpdateMap()

@@ -43,6 +43,7 @@ public:
 	void setBotName(const std::string& name);
 	void setOpponentBotName(const std::string& name);
 	void setArmiesLeft(const int& nbArmies);
+	void setnbStartingRegions(const int& nbStartingRegions);
 	void setTimebank(const int& newTimebank);
 	void setTimePerMove(const int& newTimePerMove);
 	void setMaxRounds(const int& newMaxRounds);
@@ -103,6 +104,7 @@ private:
 	int timebank;
 	int timePerMove;
 	int maxRounds;
+	int StartingRegions;
 	Parser parser;
 	Phase phase;
 };

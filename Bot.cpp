@@ -9,7 +9,7 @@
 #include "tools/StringManipulation.h"
 
 Bot::Bot() :
-		armiesLeft(0), timebank(0), timePerMove(0), maxRounds(0), parser(this), phase(NONE)
+		armiesLeft(0), timebank(0), timePerMove(0), maxRounds(0), parser(this), phase(NONE), StartingRegions(0)
 {
 }
 
@@ -25,19 +25,20 @@ void Bot::playGame()
 
 void Bot::pickStartingRegion()
 {
-	for (int i = 0; i < startingRegionsreceived.size(); ++i)
-	{
-		if(regions[startingRegionsreceived[i]].getNbNeighbors()  < 3 && ownedRegions.size() < 3)
+	for (int w = 3; w < 7; ++w)
+		for (int i = 0; i < startingRegionsreceived.size(); ++i)
 		{
-			std::cout <<  startingRegionsreceived[i] << std::endl;
-			break;
+			if(regions[startingRegionsreceived[i]].getNbNeighbors()  < w && ownedRegions.size() < StartingRegions -1)
+			{
+				std::cout <<  startingRegionsreceived[i] << std::endl;
+				break;
+			}
+			else if (ownedRegions.size() -1 == StartingRegions)
+			{
+				std::cout <<  startingRegionsreceived[i] << std::endl;
+				break;
+			}
 		}
-		else
-		{
-			std::cout <<  startingRegionsreceived[i] << std::endl;
-			break;
-		}
-	}
 
 }
 
@@ -133,7 +134,10 @@ void Bot::setMaxRounds(const int &newMaxRounds)
 {
 	maxRounds = newMaxRounds;
 }
-
+void Bot::setnbStartingRegions(const int& nbStartingRegions)
+{
+	StartingRegions = nbStartingRegions;
+}
 void Bot::clearStartingRegions()
 {
 	startingRegionsreceived.clear();
