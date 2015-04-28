@@ -6,8 +6,8 @@ SuperRegion::SuperRegion()
 {
 }
 
-SuperRegion::SuperRegion(const int& pReward)
-	: reward(pReward)
+SuperRegion::SuperRegion(int i, const int& pReward)
+	: reward(pReward), id(i), Counterwastelands(0), neutrals(0), WASTESIZE(6)
 {
 }
 

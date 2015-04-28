@@ -12,7 +12,7 @@ class SuperRegion
 {
 public:
 	SuperRegion();
-	SuperRegion(const int& pReward);
+	SuperRegion(int i,const int& pReward);
 
 	virtual ~SuperRegion();
 	void addRegion(const int& region);
@@ -28,6 +28,7 @@ private:
 	int Counterwastelands;
 	int neutrals;
 	int WASTESIZE;
+	int id;
 };
 
 #endif // SUPERREGION_H_INCLUDED

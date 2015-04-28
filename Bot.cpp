@@ -107,7 +107,7 @@ void Bot::addSuperRegion(const unsigned& noSuperRegion, const int&reward)
 	{
 		superRegions.push_back(SuperRegion());
 	}
-	superRegions[noSuperRegion] = SuperRegion(reward);
+	superRegions[noSuperRegion] = SuperRegion(noSuperRegion,reward);
 }
 
 void Bot::setBotName(const std::string& name)
