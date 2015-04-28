@@ -29,11 +29,5 @@ public:
 	*/
 	std::vector<SuperRegion> getSortedSuperRegions(std::vector<SuperRegion> SuperRegions, std::vector<int> Wastelands);
 	
-	/*
-		find Regions belonging to x superRegion 
-		@param regions
-		return vector of Region ids
-	*/
-	std::vector<Region> getRegions(	std::vector<Region> regions);
 };
 #endif // HelperRHelper

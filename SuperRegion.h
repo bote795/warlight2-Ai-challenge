@@ -20,6 +20,7 @@ public:
 	int getReward() { return reward; }
 	int getWastelands() { return reward; }
 	int getNeutrals() { return neutrals; }
+	std::vector<int> getRegions() { return regions; }
 	void calcWastelands(std::vector<int> Wastelands);
 	void calcNeutrals();
 private:
