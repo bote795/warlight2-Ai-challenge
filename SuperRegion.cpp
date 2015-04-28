@@ -26,7 +26,7 @@ void SuperRegion::calcWastelands(std::vector<int> Wastelands)
 	{
 		if (regions[i] == Wastelands[j])
 		{
-			Counterwastelands = Wastelands;
+			Counterwastelands++;
 			break;
 		}
 	}

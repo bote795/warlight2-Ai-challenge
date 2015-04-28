@@ -20,8 +20,8 @@ std::vector<SuperRegion> getSortedSuperRegions(std::vector<SuperRegion> SuperReg
 	std::vector<SuperRegion> SuperRegionsWithReward;
 	for (int i = 0; i < SuperRegions.size(); ++i)
 	{
-		SuperRegions.calcWastelands(Wastelands);
-		if (SuperRegions[i].getReward > 0)
+		SuperRegions[i].calcWastelands(Wastelands);
+		if (SuperRegions[i].getReward() > 0)
 		{
 			SuperRegionsWithReward.push_back(SuperRegions[i]);
 		}
@@ -31,26 +31,26 @@ std::vector<SuperRegion> getSortedSuperRegions(std::vector<SuperRegion> SuperReg
 		}
 	}
 	//then least amount of neutrals
-	while(!SuperRegionsWithReward.isEmpty())
+	while(!SuperRegionsWithReward.empty())
 	{
 		int minNeutrals = 10000;
 		int index=0;
 		//find smallestNeutrals
 		for (int i = 0; i < SuperRegionsWithReward.size(); ++i)
 		{
-			if (SuperRegionsWithReward.getNeutrals() < minNeutrals)
+			if (SuperRegionsWithReward[i].getNeutrals() < minNeutrals)
 			{
-				minNeutrals = SuperRegionsWithReward.getNeutrals();
+				minNeutrals = SuperRegionsWithReward[i].getNeutrals();
 				index=i;
 			}
 		}
 
-		out.push_back(SuperRegionsWithReward[i]); // add SuperRegion with least amount of neutral Enemies
+		out.push_back(SuperRegionsWithReward[index]); // add SuperRegion with least amount of neutral Enemies
 
-		SuperRegionsWithReward.erase(index);
+		SuperRegionsWithReward.erase(SuperRegionsWithReward.begin()+index);
 	}
 	//then add the superREgions with armies reward of 0
-	out.insert(out.end(), zeroReward.being(), zeroReward.end());
+	out.insert(out.end(), zeroReward.begin(), zeroReward.end());
 }
 std::vector<Region> getRegions(	std::vector<Region> regions)
 {
