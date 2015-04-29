@@ -15,13 +15,28 @@
 class Moves
 {
 public:
-	Moves();
+	Moves(std::vector<Region> r,std::vector<int> o);
 	~Moves();
+	/*
+		return vector of indexs of owned areas need assitance
+	*/
+	std::vector<int> NeedReinforcments();
+	/*
+		@param index of region
+		return true if there is enemy around
+	*/
+	bool EnemyAround(int index);
+	bool FriendlyFullAround(int index);
+	
 	/*
 		@param status of current region
 		different codes 
 	*/
-	int priority(Player status);
+	int priority(Player status, int regionIndex);
+
+private:
+	std::vector<Region> regions;
+	std::vector<int> ownedRegions;
 
 };
 #endif // Moves Helper

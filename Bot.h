@@ -14,6 +14,7 @@
 #include "Region.h"
 #include "SuperRegion.h"
 #include "strategy/HelperRegions.h"
+#include "strategy/Moves.h"
 
 
 

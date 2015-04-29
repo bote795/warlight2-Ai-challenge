@@ -32,11 +32,29 @@ void Bot::pickStartingRegion()
 
 void Bot::placeArmies()
 {
-	// START HERE!
-	unsigned region = std::rand() % ownedRegions.size();
-	std::cout << botName << " place_armies " << ownedRegions[region] << " " << armiesLeft
-			<< std::endl;
-	addArmies(ownedRegions[region], armiesLeft);
+	std::vector<std::string> moves;
+	Moves help(regions,ownedRegions);
+	std::vector<int> regionsAssitance =help.NeedReinforcments();
+	int assitanceMin = 2;
+	//sent reinformcents to ppl in need 2 each
+	for (int i = 0; i < regionsAssitance.size() && armiesLeft >2; ++i)
+	{
+		std::stringstream place;
+		place << botName << " place_armies " << regionsAssitance[i] << " " << assitanceMin;
+		addArmies(regionsAssitance[i], assitanceMin);
+		armiesLeft-=assitanceMin;
+		moves.push_back(place.str());
+	}
+	//send remaning armies to random place atm
+	if(armiesLeft > 0)
+	{
+		std::stringstream place;
+		unsigned region = std::rand() % ownedRegions.size();
+		place << botName << " place_armies " << ownedRegions[region] << " " << armiesLeft;
+		moves.push_back(place.str());
+		addArmies(ownedRegions[region], armiesLeft);
+	}
+	std::cout << string::join(moves) << std::endl;	
 }
 
 void Bot::makeMoves()
