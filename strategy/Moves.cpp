@@ -5,8 +5,8 @@
 //project
 #include "Moves.h"
 
-Moves::Moves(std::vector<Region> r,std::vector<int> o)
-: regions(r),ownedRegions(o)
+Moves::Moves(std::vector<Region> r,std::vector<int> o, std::vector<int> w)
+: regions(r),ownedRegions(o),wastelands(w)
 {}
 Moves::~Moves()
 {
@@ -25,30 +25,54 @@ std::vector<int> Moves::NeedReinforcments()
 	return needReinforcments;
 	
 }
-int Moves::priority(Player status, int regionIndex){
-	int code;
-	switch(status)
+string Moves::priority(int regionIndex){
+	string code="";
+	if (regions[regionIndex].getArmies() > 1)
+		if(FriendlyFullAround(regionIndex))
+		{
+			//more than one army and surrounding is owned
+			//move armies from here
+			code = "transfer";  
+			return code;
+		}
+	else
+		return "0"; 
+	if (EnemyAround(regionIndex))
 	{
-		case ME: 
-				if(FriendlyFullAround(regionIndex))
+		for (int i = 0; i < regions[regionIndex].getNbNeighbors(); ++i)
+		{
+			if (regions[regions[regionIndex].getNeighbor(i)].getOwner() != ME)
+			{
+				//if isnt higher armies than we do
+				if (regions[regions[regionIndex].getNeighbor(i)].getArmies() < regions[regionIndex].getArmies())
 				{
-					//more than one army and surrounding is owned
-					//move armies from here
-					return code= 1;  
+					//attack it
+					code="attack "+regions[regionIndex].getNeighbor(i);
+					return code;
 				}
-			break;
-		case ENEMY: 
-				  //if nieghbor is enemy
-				    //if isnt higher armies than we do
-						//attack it
-			break;
-		case NEUTRAL: 
-					//more than one army and neighboring is neutral
-						//is nighbor a wasteland?
-						//if so ignore
-						//else take over if lower than our armies
-			break; 
+			}
+		}
 	}
+	 
+	  //more than 3 army and neighboring is neutral
+		//is nighbor a wasteland?
+		//if so ignore
+		//else take over if lower than our armies
+	for (int i = 0; i < regions[regionIndex].getNbNeighbors(); ++i)
+	{
+		if (regions[regions[regionIndex].getNeighbor(i)].getOwner() != NEUTRAL)
+		{
+			//if isnt higher armies than we do
+			if (regionsregions[regionIndex].getArmies() > 3 &&
+				!wasteland(regions[regionIndex].getNeighbor(i)))
+			{
+				code="move "+regions[regionIndex].getNeighbor(i);
+				return code;
+			}
+		}
+	}
+	 
+	
 }
  
 bool Moves::EnemyAround(int index)
@@ -72,4 +96,15 @@ bool Moves::FriendlyFullAround(int index)
 		}
 	}
 	return true;
+}
+bool Moves::wasteland(int index)
+{
+	for (int i = 0; i < wastelands.size(); ++i)
+	{
+		if(wastelands[i] == index)
+		{
+			return true;
+		}
+	}
+	retrun false;
 }

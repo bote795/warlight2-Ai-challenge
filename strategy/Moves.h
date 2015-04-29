@@ -27,16 +27,18 @@ public:
 	*/
 	bool EnemyAround(int index);
 	bool FriendlyFullAround(int index);
-	
+
 	/*
 		@param status of current region
 		different codes 
 	*/
-	int priority(Player status, int regionIndex);
+	string priority(int regionIndex);
+	bool Moves::wasteland(int index);
 
 private:
 	std::vector<Region> regions;
 	std::vector<int> ownedRegions;
+	std::vector<int> wastelands;
 
 };
 #endif // Moves Helper
