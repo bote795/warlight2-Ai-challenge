@@ -13,6 +13,7 @@
 #include "Parser.h"
 #include "Region.h"
 #include "SuperRegion.h"
+#include "strategy/HelperRegions.h"
 
 
 
@@ -89,6 +90,7 @@ public:
 
 	void resetRegionsOwned();
 	void preferStartingRegions();
+
 
 private:
 	std::ifstream in;

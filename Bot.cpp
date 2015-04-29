@@ -1,7 +1,6 @@
 // stl
 #include <iostream>
 #include <string>
-
 //project
 #include "Bot.h"
 
@@ -23,23 +22,12 @@ void Bot::playGame()
 	parser.parseInput();
 }
 
+
 void Bot::pickStartingRegion()
 {
-	for (int w = 3; w < 7; ++w)
-		for (int i = 0; i < startingRegionsreceived.size(); ++i)
-		{
-			if(regions[startingRegionsreceived[i]].getNbNeighbors()  < w && ownedRegions.size() < StartingRegions -1)
-			{
-				std::cout <<  startingRegionsreceived[i] << std::endl;
-				break;
-			}
-			else if (ownedRegions.size() -1 == StartingRegions)
-			{
-				std::cout <<  startingRegionsreceived[i] << std::endl;
-				break;
-			}
-		}
-
+	HelperRegions help;
+	int temp =help.getsmallestStartingRegions(startingRegionsreceived,regions);
+	std::cout << temp << std::endl; 	
 }
 
 void Bot::placeArmies()

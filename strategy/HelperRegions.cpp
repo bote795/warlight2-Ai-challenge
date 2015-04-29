@@ -11,7 +11,7 @@ HelperRegions::~HelperRegions()
 {
 
 }
-std::vector<SuperRegion> getSortedSuperRegions(std::vector<SuperRegion> SuperRegions,std::vector<int> Wastelands)
+std::vector<SuperRegion> HelperRegions::getSortedSuperRegions(std::vector<SuperRegion> SuperRegions,std::vector<int> Wastelands)
 {
 
 	// First choose the SuperRegions with armiesReward > 0 
@@ -52,7 +52,40 @@ std::vector<SuperRegion> getSortedSuperRegions(std::vector<SuperRegion> SuperReg
 	//then add the superREgions with armies reward of 0
 	out.insert(out.end(), zeroReward.begin(), zeroReward.end());
 }
-std::vector<Region> getRegions(	std::vector<Region> regions)
+std::vector<int> HelperRegions::getSortedStartingRegions (std::vector<int> startingRegionsreceived, std::vector<Region> regions)
 {
+	std::vector<int> minEdges;
+	int index=0;
+	
+	while(!startingRegionsreceived.empty())
+	{
+		int min=1000;
+		for (int i = 0; i < startingRegionsreceived.size(); ++i)
+		{
+			if(regions[startingRegionsreceived[i]].getNbNeighbors() < min)
+			{
+				min=regions[startingRegionsreceived[i]].getNbNeighbors();
+				index=i;
+			}
+		}
+		minEdges.push_back(startingRegionsreceived[index]);
+		startingRegionsreceived.erase(startingRegionsreceived.begin()+index-1);
+		break;
+	}
+	return minEdges;
+}
 
+int HelperRegions::getsmallestStartingRegions (std::vector<int> startingRegionsreceived, std::vector<Region> regions)
+{
+	int min=1000;
+	int index;
+		for (int i = 0; i < startingRegionsreceived.size(); ++i)
+		{
+			if(regions[startingRegionsreceived[i]].getNbNeighbors() < min)
+			{
+				min=regions[startingRegionsreceived[i]].getNbNeighbors();
+				index=i;
+			}
+		}
+		return startingRegionsreceived[index];
 }

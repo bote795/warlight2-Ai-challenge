@@ -28,6 +28,18 @@ public:
 		in points to the ones not worth any points
 	*/
 	std::vector<SuperRegion> getSortedSuperRegions(std::vector<SuperRegion> SuperRegions, std::vector<int> Wastelands);
-	
+	/*
+		sort starting regions from least neighbored to most
+		@param startingRegionsrecieved
+		@param regions vector
+	*/
+	std::vector<int> getSortedStartingRegions (std::vector<int> startingRegionsreceived, 	std::vector<Region> regions);
+	/*
+		returns smallest amount of neighbors region
+		@param startingRegionsrecieved
+		@param regions vector
+	*/
+	int getsmallestStartingRegions (std::vector<int> startingRegionsreceived, 	std::vector<Region> regions);
+
 };
 #endif // HelperRHelper
