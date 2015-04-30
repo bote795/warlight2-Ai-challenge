@@ -33,7 +33,7 @@ void Bot::pickStartingRegion()
 void Bot::placeArmies()
 {
 	std::vector<std::string> moves;
-	Moves help(regions,ownedRegions);
+	Moves help(regions,ownedRegions,wastelands);
 	std::vector<int> regionsAssitance =help.NeedReinforcments();
 	int assitanceMin = 2;
 	//sent reinformcents to ppl in need 2 each

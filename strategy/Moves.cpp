@@ -1,6 +1,5 @@
 // stl
 #include <iostream>
-#include <string>
 
 //project
 #include "Moves.h"
@@ -25,8 +24,8 @@ std::vector<int> Moves::NeedReinforcments()
 	return needReinforcments;
 	
 }
-string Moves::priority(int regionIndex){
-	string code="";
+std::string Moves::priority(int regionIndex){
+	std::string code="";
 	if (regions[regionIndex].getArmies() > 1)
 		if(FriendlyFullAround(regionIndex))
 		{
@@ -41,7 +40,7 @@ string Moves::priority(int regionIndex){
 	{
 		for (int i = 0; i < regions[regionIndex].getNbNeighbors(); ++i)
 		{
-			if (regions[regions[regionIndex].getNeighbor(i)].getOwner() != ME)
+			if (regions[regions[regionIndex].getNeighbor(i)].getOwner() == ENEMY)
 			{
 				//if isnt higher armies than we do
 				if (regions[regions[regionIndex].getNeighbor(i)].getArmies() < regions[regionIndex].getArmies())

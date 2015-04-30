@@ -7,6 +7,7 @@
 #include <vector>
 #include <cmath>
 #include <sstream>
+#include <string>
 
 // project
 #include "Region.h"
@@ -15,7 +16,7 @@
 class Moves
 {
 public:
-	Moves(std::vector<Region> r,std::vector<int> o);
+	Moves(std::vector<Region> r,std::vector<int> o,std::vector<int> w);
 	~Moves();
 	/*
 		return vector of indexs of owned areas need assitance
@@ -32,8 +33,8 @@ public:
 		@param status of current region
 		different codes 
 	*/
-	string priority(int regionIndex);
-	bool Moves::wasteland(int index);
+	std::string priority(int regionIndex);
+	bool wasteland(int index);
 
 private:
 	std::vector<Region> regions;
